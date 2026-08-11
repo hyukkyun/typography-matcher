@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typography Matcher — Google Fonts 페어링 추천</title>
+  <meta name="description" content="Google Fonts API 기반 제목-본문 폰트 페어링 추천 도구. 카테고리별 대비와 무드 매칭으로 어울리는 조합을 찾아보세요." />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google Fonts CSS API: 헤더에 자주 쓰이는 4개 패밀리만 미리 로드 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Playfair+Display:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Source+Sans+3:wght@400;500;700&display=swap" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__left">
+      <div class="logo">
+        <span class="logo__a">Aa</span>
+        <span class="logo__b">B</span>
+        <span class="logo__c">c</span>
+      </div>
+      <div>
+        <h1 class="topbar__title">Typography Matcher</h1>
+        <p class="topbar__sub">Google Fonts API · 제목과 본문의 어울리는 조합을 찾다</p>
+      </div>
+    </div>
+    <div class="topbar__right">
+      <div class="lang-toggle" role="tablist" aria-label="언어 필터">
+        <button class="lang-toggle__btn lang-toggle__btn--active" data-script="all" type="button" role="tab" aria-selected="true">전체</button>
+        <button class="lang-toggle__btn" data-script="korean" type="button" role="tab" aria-selected="false">한글</button>
+        <button class="lang-toggle__btn" data-script="latin" type="button" role="tab" aria-selected="false">영문</button>
+      </div>
+      <button class="btn btn--ghost" id="randomBtn" type="button" title="랜덤 페어">
+        🎲 랜덤
+      </button>
+      <button class="btn btn--ghost" id="swapBtn" type="button" title="제목 ↔ 본문 교환">
+        ⇄ 스왑
+      </button>
+      <button class="btn btn--icon" id="helpBtn" type="button" title="사용법 매뉴얼 (열고/닫기)">❓</button>
+      <button class="btn btn--icon" id="themeToggle" type="button" title="테마 전환">🌙</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- ── 좌측 컨트롤 ────────────────────────────── -->
+    <aside class="controls">
+      <section class="panel">
+        <div class="panel__head">
+          <h2 class="panel__title">제목 폰트</h2>
+          <div class="panel__actions">
+            <button class="link-btn" id="titleLink" type="button" title="이 폰트 다운로드 / 링크">🔗</button>
+            <button class="lock-btn" id="titleLock" type="button" aria-pressed="false" title="제목 고정하기">🔓</button>
+            <div class="link-popover" id="titleLinkPopover" hidden>
+              <div class="link-popover__url" id="titleLinkURL"></div>
+              <div class="link-popover__actions">
+                <button class="link-popover__btn" data-action="copy" type="button">📋 URL 복사</button>
+                <button class="link-popover__btn" data-action="download" type="button">⬇ 폰트 받기</button>
+                <a class="link-popover__btn link-popover__btn--link" id="titleLinkPage" target="_blank" rel="noopener">↗ Google Fonts</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="font-picker" data-target="title">
+          <button class="font-picker__btn" type="button">
+            <span class="font-picker__current">Playfair Display</span>
+            <span class="font-picker__arrow">▾</span>
+          </button>
+          <div class="font-picker__menu" hidden>
+            <div class="font-picker__list"></div>
+          </div>
+        </div>
+        <div class="slider-row">
+          <label>크기 <span id="titleSizeVal" class="slider-row__val">56px</span></label>
+          <input id="titleSize" type="range" min="20" max="120" value="56" />
+        </div>
+        <div class="slider-row">
+          <label>굵기 <span id="titleWeightVal" class="slider-row__val">700</span></label>
+          <input id="titleWeight" type="range" min="100" max="900" step="100" value="700" />
+        </div>
+        <div class="slider-row">
+          <label>자간 <span id="titleLetterSpacingVal" class="slider-row__val">0.00em</span></label>
+          <input id="titleLetterSpacing" type="range" min="-5" max="20" value="0" />
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head">
+          <h2 class="panel__title">본문 폰트</h2>
+          <div class="panel__actions">
+            <button class="link-btn" id="bodyLink" type="button" title="이 폰트 다운로드 / 링크">🔗</button>
+            <button class="lock-btn" id="bodyLock" type="button" aria-pressed="false" title="본문 고정하기">🔓</button>
+            <div class="link-popover" id="bodyLinkPopover" hidden>
+              <div class="link-popover__url" id="bodyLinkURL"></div>
+              <div class="link-popover__actions">
+                <button class="link-popover__btn" data-action="copy" type="button">📋 URL 복사</button>
+                <button class="link-popover__btn" data-action="download" type="button">⬇ 폰트 받기</button>
+                <a class="link-popover__btn link-popover__btn--link" id="bodyLinkPage" target="_blank" rel="noopener">↗ Google Fonts</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="font-picker" data-target="body">
+          <button class="font-picker__btn" type="button">
+            <span class="font-picker__current">Source Sans 3</span>
+            <span class="font-picker__arrow">▾</span>
+          </button>
+          <div class="font-picker__menu" hidden>
+            <div class="font-picker__list"></div>
+          </div>
+        </div>
+        <div class="slider-row">
+          <label>크기 <span id="bodySizeVal" class="slider-row__val">18px</span></label>
+          <input id="bodySize" type="range" min="12" max="32" value="18" />
+        </div>
+        <div class="slider-row">
+          <label>굵기 <span id="bodyWeightVal" class="slider-row__val">400</span></label>
+          <input id="bodyWeight" type="range" min="100" max="900" step="100" value="400" />
+        </div>
+        <div class="slider-row">
+          <label>자간 <span id="bodyLetterSpacingVal" class="slider-row__val">0.00em</span></label>
+          <input id="bodyLetterSpacing" type="range" min="-5" max="20" value="0" />
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel__title">샘플 텍스트</h2>
+        <input id="customTitle" class="input" type="text" value="The quick brown fox" />
+        <textarea id="customBody" class="input input--area" rows="4">Typography is the craft of endowing human language with a durable visual form. A good pairing makes the title sing and the body breathe — each doing its own job without fighting for attention.</textarea>
+      </section>
+    </aside>
+
+    <!-- ── 가운데 미리보기 ────────────────────────── -->
+    <section class="preview">
+      <div class="preview__meta">
+        <div class="meta-item">
+          <span class="meta-item__label">제목</span>
+          <span class="meta-item__name" id="metaTitle">—</span>
+          <span class="meta-item__cat" id="metaTitleCat">—</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item__label">본문</span>
+          <span class="meta-item__name" id="metaBody">—</span>
+          <span class="meta-item__cat" id="metaBodyCat">—</span>
+        </div>
+        <div class="meta-item meta-item--score">
+          <span class="meta-item__label">페어 점수</span>
+          <span class="meta-item__score" id="metaScore">0</span>
+        </div>
+      </div>
+
+      <article class="preview__canvas">
+        <h2 class="preview__title" id="previewTitle">The quick brown fox</h2>
+        <p class="preview__body" id="previewBody">Typography is the craft of endowing human language with a durable visual form. A good pairing makes the title sing and the body breathe — each doing its own job without fighting for attention.</p>
+      </article>
+
+      <div class="preview__actions">
+        <button class="btn btn--primary" id="autoBtn" type="button">
+          ✨ 자동 추천
+        </button>
+        <p class="preview__hint">🔒 잠금으로 추천 범위 좁히기 · 매 클릭마다 새 페어</p>
+      </div>
+    </section>
+
+    <!-- ── 우측 추천 그리드 ────────────────────────── -->
+    <aside class="recommend">
+      <div class="recommend__head">
+        <h2 class="recommend__title" id="recTitle">에디토리얼 추천</h2>
+      </div>
+      <div class="rec-grid" id="recGrid"></div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <span>폰트 출처: <a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a></span>
+    <span>·</span>
+    <span>페어링 추천은 카테고리 대비와 무드 매칭 기반 휴리스틱</span>
+  </footer>
+
+  <!-- ── 매뉴얼 모달 ──────────────────────── -->
+  <div class="modal" id="manualModal" hidden role="dialog" aria-modal="true" aria-labelledby="manualModalTitle">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__container">
+      <div class="modal__header">
+        <h2 class="modal__title" id="manualModalTitle">📖 사용법 · Typography Matcher</h2>
+        <div class="modal__actions">
+          <a class="modal__btn" href="manual.html" target="_blank" rel="noopener" title="새 탭에서 열기">↗ 새 탭</a>
+          <button class="modal__btn modal__close" type="button" data-close aria-label="닫기">✕</button>
+        </div>
+      </div>
+      <div class="modal__body">
+        <aside class="toc" id="modalToc">
+          <div class="toc__title">목차</div>
+          <ul></ul>
+        </aside>
+        <article class="content" id="modalContent">
+          <p style="color: var(--text-mute); padding: 24px;">불러오는 중…</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/fonts.js"></script>
+  <script src="js/pairing.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

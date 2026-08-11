@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사용법 — Typography Matcher</title>
+  <meta name="description" content="Typography Matcher 매뉴얼. Google Fonts 페어링 추천 도구의 모든 기능과 사용법." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:wght@400;700&family=Noto+Serif+KR:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__left">
+      <a href="index.html" class="logo" title="Typography Matcher로 돌아가기">
+        <span class="logo__a">Aa</span>
+        <span class="logo__b">B</span>
+        <span class="logo__c">c</span>
+      </a>
+      <div>
+        <h1 class="topbar__title">사용법</h1>
+        <p class="topbar__sub">Typography Matcher 매뉴얼</p>
+      </div>
+    </div>
+    <div class="topbar__right">
+      <a class="btn" href="index.html">← 도구로 돌아가기</a>
+      <button class="btn btn--icon" id="themeToggle" type="button" title="테마 전환">🌙</button>
+    </div>
+  </header>
+
+  <div class="manual-layout">
+    <!-- ── 목차 ──────────────────────────── -->
+    <aside class="toc">
+      <div class="toc__title">목차</div>
+      <ul>
+        <li><a href="#intro">시작하기</a></li>
+        <li><a href="#quick">빠른 시작</a></li>
+        <li><a href="#layout">인터페이스</a></li>
+        <li><a href="#picker">폰트 피커</a></li>
+        <li><a href="#curation">폰트 큐레이션</a></li>
+        <li><a href="#styles">스타일 조정</a></li>
+        <li><a href="#lock">잠금과 추천</a></li>
+        <li><a href="#download">폰트 다운로드</a></li>
+        <li><a href="#shortcuts">단축키 &amp; 팁</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#tech">기술 노트</a></li>
+      </ul>
+    </aside>
+
+    <!-- ── 본문 ──────────────────────────── -->
+    <article class="content">
+
+      <div class="hero">
+        <h1>Typography Matcher 사용법</h1>
+        <p>Google Fonts의 100여 개 폰트로 제목-본문 페어를 추천받고, 라이브 미리보기, 잠금 추천, 폰트 다운로드까지 한 곳에서.</p>
+      </div>
+
+      <!-- ── 시작하기 ──────────────────── -->
+      <section id="intro">
+        <h2>시작하기</h2>
+        <p>Typography Matcher는 Google Fonts의 카테고리(Serif / Sans-serif / Display / Handwriting / Monospace)별 약 100여 개 폰트를 큐레이션하고, 카테고리 대비 + 무드 매칭 알고리즘으로 어울리는 제목-본문 조합을 추천해주는 무료 웹 도구예요.</p>
+        <ul>
+          <li>한/영 폰트 98개 — 영문 75, 한글 23</li>
+          <li>5개 카테고리, 추천 가능한 페어 9,506개</li>
+          <li>다크 모드, 잠금 추천, 라이브 미리보기</li>
+          <li>폰트별 <code>@import</code> URL 복사 / WOFF2 파일 다운로드</li>
+        </ul>
+        <div class="callout">
+          <strong>백엔드 없음.</strong> 모든 폰트는 Google Fonts CDN에서 직접 로드. 설치, 로그인, 회원가입 없이 바로 사용 가능.
+        </div>
+      </section>
+
+      <!-- ── 빠른 시작 ──────────────────── -->
+      <section id="quick">
+        <h2>빠른 시작</h2>
+        <ol>
+          <li><strong>제목 폰트 선택</strong> — 좌측 패널의 "제목 폰트" 피커를 클릭해서 폰트를 고르면 가운데 미리보기에 큰 글씨로 표시돼요.</li>
+          <li><strong>본문 폰트 선택</strong> — "본문 폰트" 피커에서 본문용 폰트를 골라요.</li>
+          <li><strong>✨ 자동 추천 클릭</strong> — 가운데 아래 버튼을 누르면 오른쪽에 어울리는 페어 9개가 추천돼요.</li>
+          <li><strong>추천 카드 클릭</strong> — 마음에 드는 페어를 클릭하면 제목/본문이 자동 적용되고 미리보기가 갱신돼요.</li>
+          <li><strong>🔗 다운로드 링크</strong> — 패널 헤더의 🔗 버튼으로 <code>@import</code> URL 복사하거나 폰트 파일을 받을 수 있어요.</li>
+        </ol>
+      </section>
+
+      <!-- ── 인터페이스 ──────────────────── -->
+      <section id="layout">
+        <h2>인터페이스</h2>
+        <p>세 개의 주요 영역으로 나뉘어요:</p>
+        <h3>① 상단 바</h3>
+        <ul>
+          <li>로고 + 타이틀 (좌측)</li>
+          <li>한/영 토글, 🎲 랜덤, ⇄ 스왑, ❓ 매뉴얼, 🌙 테마 (우측)</li>
+        </ul>
+        <h3>② 좌측 컨트롤 패널</h3>
+        <ul>
+          <li>제목 / 본문 폰트 피커</li>
+          <li>크기 · 굵기 · 자간 슬라이더 (제목/본문 각각)</li>
+          <li>샘플 텍스트 입력</li>
+        </ul>
+        <h3>③ 가운데 미리보기 + 우측 추천</h3>
+        <ul>
+          <li>위: 메타 정보 (폰트명, 카테고리, 페어 점수)</li>
+          <li>가운데: 실시간 타이포그래피 미리보기</li>
+          <li>아래: ✨ 자동 추천 버튼</li>
+          <li>우측: 추천 카드 그리드 (9개)</li>
+        </ul>
+      </section>
+
+      <!-- ── 폰트 피커 ──────────────────── -->
+      <section id="picker">
+        <h2>폰트 피커</h2>
+        <p>버튼을 클릭하면 카테고리별 그룹으로 정렬된 폰트 목록이 떠요. 각 옵션이 <strong>자기 폰트로 이름이 표시</strong>돼서 어떤 폰트인지 한눈에 알 수 있어요.</p>
+
+        <h3>카테고리</h3>
+        <ul>
+          <li><strong>Serif</strong> — 명조, 격식. Playfair Display, Merriweather, Lora, Noto Serif KR, Nanum Myeongjo 등</li>
+          <li><strong>Sans-serif</strong> — 고딕, 깔끔. Inter, Roboto, Montserrat, Noto Sans KR, Nanum Gothic 등</li>
+          <li><strong>Display</strong> — 임팩트, 헤드라인. Bebas Neue, Oswald, Black Han Sans, Do Hyeon 등</li>
+          <li><strong>Handwriting</strong> — 따뜻함, 캐주얼. Caveat, Dancing Script, Nanum Brush Script 등</li>
+          <li><strong>Monospace</strong> — 코드, 에디토리얼. JetBrains Mono, Fira Code, Nanum Gothic Coding 등</li>
+        </ul>
+
+        <h3>한/영 필터 (상단 우측)</h3>
+        <ul>
+          <li><strong>전체</strong> — 98개 모두</li>
+          <li><strong>한글</strong> — 한글 지원 폰트 23개 (Noto Sans KR, Nanum Gothic, IBM Plex Sans KR 등)</li>
+          <li><strong>영문</strong> — 영문 중심 폰트 75개 (Inter, Playfair Display, Bebas Neue 등)</li>
+        </ul>
+        <p>필터를 바꾸면 드롭다운과 추천 결과가 함께 갱신돼요. 현재 선택한 폰트가 새 스크립트를 지원하지 않으면 자동으로 그 스크립트의 기본 폰트로 교체됩니다.</p>
+
+        <h3>사용법</h3>
+        <ul>
+          <li><strong>열기</strong> — 피커 버튼 클릭</li>
+          <li><strong>닫기</strong> — 다시 클릭, <span class="kbd">ESC</span>, 바깥 클릭</li>
+          <li><strong>잠긴 슬롯</strong> — 🔒 상태에선 피커가 비활성 (클릭 안 됨)</li>
+        </ul>
+      </section>
+
+      <!-- ── 폰트 큐레이션 ──────────────────── -->
+      <section id="curation">
+        <h2>폰트 큐레이션 (왜 98개?)</h2>
+        <p>Google Fonts 전체 카탈로그는 <strong>1,500개+</strong> 입니다. 이 중 98개를 선별한 데에는 의도적인 큐레이션 원칙이 있어요. 숫자 자체에 깊은 의미는 없고, 카테고리 균형과 실용성을 우선해서 채우다 보니 98에서 멈춘 거예요.</p>
+
+        <h3>5가지 선정 기준</h3>
+        <ol>
+          <li><strong>언어 한정</strong> — 라틴 + 한글 위주. 아랍어 / 히브리어 / 태국어 / 데바나가리 / 티벳어 등 다른 문자 체계 폰트는 제외 (도구 용도와 안 맞음)</li>
+          <li><strong>잘 알려진 폰트</strong> — Playfair Display, Inter, Roboto, Bebas Neue, JetBrains Mono 처럼 디자이너들 사이에서 검증된 것 위주</li>
+          <li><strong>카테고리 균형</strong> — 5개 카테고리 × 라틴/한글 매트릭스에서 비어있는 칸 없이</li>
+          <li><strong>무드 다양성</strong> — editorial / friendly / tech / classic / retro 등 다양한 분위기 커버</li>
+          <li><strong>실용성</strong> — 실제로 프로젝트에 쓸 법한 것. 너무 특수한 폰트(예: 한 weight만 있거나 너무 장식적인 것) 제외</li>
+        </ol>
+
+        <h3>카테고리 분포</h3>
+        <table>
+          <thead>
+            <tr><th>카테고리</th><th>라틴</th><th>한글</th><th>합계</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Serif</td><td>19</td><td>4</td><td>23</td></tr>
+            <tr><td>Sans-serif</td><td>21</td><td>6</td><td>27</td></tr>
+            <tr><td>Display</td><td>14</td><td>5</td><td>19</td></tr>
+            <tr><td>Handwriting</td><td>12</td><td>6</td><td>18</td></tr>
+            <tr><td>Monospace</td><td>9</td><td>2</td><td>11</td></tr>
+            <tr><td><strong>합계</strong></td><td><strong>75</strong></td><td><strong>23</strong></td><td><strong>98</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h3>왜 1,500개가 아니라 98개?</h3>
+        <table>
+          <thead><tr><th>규모</th><th>이득</th><th>손해</th></tr></thead>
+          <tbody>
+            <tr><td>50개 (줄임)</td><td>피커 가벼움, 추천 품질 ↑ (엄선)</td><td>선택지 부족</td></tr>
+            <tr><td><strong>98개 (현재)</strong></td><td>균형 잡힌 큐레이션</td><td>특수한 폰트 없는 경우 있음</td></tr>
+            <tr><td>200개 (확장)</td><td>선택지 풍성</td><td>피커 스크롤 길어짐, 프리로드 트래픽 ↑</td></tr>
+            <tr><td>1,500개+ (전체)</td><td>다 있음</td><td>노이즈, 추천 품질 ↓, 아랍어 등 불필요</td></tr>
+          </tbody>
+        </table>
+
+        <h3>폰트 추가 / 제거하기</h3>
+        <p>필요에 따라 직접 조정할 수 있어요.</p>
+
+        <h4>A) <code>data/fonts.js</code> 직접 편집 (가장 간단)</h4>
+        <p>배열에 한 줄씩 더하거나 빼면 끝:</p>
+        <pre><code>// 추가 예시
+{ name: 'Fraunces', category: 'serif', weights: [400, 700, 900],
+  mood: ['editorial', 'elegant'], scripts: ['latin'] },
+
+// 제거 예시 — 해당 줄을 통째로 삭제</code></pre>
+        <p>수정 후 페이지 새로고침하면 즉시 반영돼요. 폰트는 자동으로 로드되고 추천 풀에도 포함됩니다.</p>
+
+        <h4>B) Google Fonts Developer API로 전체 자동 로드</h4>
+        <p>API 키를 발급받아 1,500+ 폰트를 동적으로 가져올 수 있어요.</p>
+        <pre><code>GET https://www.googleapis.com/webfonts/v1/webfonts?key=YOUR_KEY</code></pre>
+        <ul>
+          <li>장점: 1,500+ 다 가져옴, 자동 업데이트</li>
+          <li>단점: API 키 등록 필요, 아랍어/히브리어 등 쓸데없는 것도 다 옴 (필터링 필요), 카테고리는 직접 매핑해야 함</li>
+        </ul>
+
+        <h4>C) <code>?subsets=</code> 필터로 부분만 가져오기</h4>
+        <p>API 호출 시 <code>?subsets=latin,korean</code>으로 필터하면 라틴+한글만 약 600개. 추천 풀도 풍성해지고 스크롤도 감당 가능.</p>
+
+        <div class="callout">
+          <strong>💡 추천:</strong> 지금 98개에 "없는 게 뭐가 있었으면 좋겠어?" 가 더 생산적인 질문이에요. 자주 쓰는 폰트나 추가하고 싶은 무드가 있으면 <code>data/fonts.js</code>에 직접 추가하는 게 가장 빠르고 안전해요. 카테고리별 5~10개씩 더 추가하면 130~150개 정도가 추천 적정선이에요.
+        </div>
+      </section>
+
+      <!-- ── 스타일 ──────────────────── -->
+      <section id="styles">
+        <h2>스타일 조정</h2>
+        <p>각 슬라이더는 제목/본문 <strong>각각 별도</strong>로 조절돼요. 폰트를 고른 뒤 미세 조정에 사용하세요.</p>
+
+        <h3>크기</h3>
+        <ul>
+          <li>제목: 20 ~ 120px</li>
+          <li>본문: 12 ~ 32px</li>
+        </ul>
+
+        <h3>굵기</h3>
+        <p>100 ~ 900 (10단계). Google Fonts에서 실제로 제공하는 weight만 의미 있게 적용돼요 — 예를 들어 Bebas Neue는 400만 있어서 슬라이더를 움직여도 외관은 바뀌지 않아요.</p>
+
+        <h3>자간</h3>
+        <p>-0.05em ~ 0.20em 범위. 제목은 타이트하게(음수), 본문은 약간 트게(양수) 주는 게 일반적이에요.</p>
+
+        <h3>샘플 텍스트</h3>
+        <p>한/영 토글에 따라 자동으로 그 스크립트의 예문이 들어가요. 직접 입력 가능 — 한 번 편집하면 모드 전환해도 유지돼요.</p>
+      </section>
+
+      <!-- ── 잠금과 추천 ──────────────────── -->
+      <section id="lock">
+        <h2>잠금과 추천</h2>
+        <p>패널 헤더의 <span class="kbd">🔓</span> 버튼으로 제목/본문 폰트를 <strong>고정</strong>할 수 있어요. 자동 추천이 잠긴 슬롯은 건드리지 않고, 나머지 슬롯만 추천해줘요.</p>
+
+        <h3>3가지 추천 모드</h3>
+        <table>
+          <thead>
+            <tr><th>모드</th><th>동작</th><th>추천 헤더</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>둘 다 자유</td>
+              <td>큐레이션 5개 + 랜덤 고득점 4개를 셔플해서 9개 표시</td>
+              <td>에디토리얼 추천 / 한글 추천 페어 / 영문 추천 페어</td>
+            </tr>
+            <tr>
+              <td>제목만 🔒</td>
+              <td>잠긴 제목에 어울리는 <strong>본문</strong> 9개 추천</td>
+              <td>🔒 "Playfair Display" 고정 — 어울리는 본문</td>
+            </tr>
+            <tr>
+              <td>본문만 🔒</td>
+              <td>잠긴 본문에 어울리는 <strong>제목</strong> 9개 추천</td>
+              <td>🔒 "Nanum Gothic" 고정 — 어울리는 제목</td>
+            </tr>
+            <tr>
+              <td>둘 다 🔒</td>
+              <td>추천 중지 + 해제 안내</td>
+              <td>🔒 모두 고정됨</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>추천 카드 동작</h3>
+        <ul>
+          <li>매 <strong>✨ 자동 추천 클릭</strong>마다 다른 9개 표시 (셔플 + 랜덤)</li>
+          <li>카드 클릭 시: 잠금 안 된 슬롯만 변경, 잠긴 슬롯은 유지</li>
+          <li>잠긴 폰트는 카드에서 흐리게(0.45) + 🔒 표시로 구분</li>
+        </ul>
+
+        <h3>🎲 랜덤 / ⇄ 스왑</h3>
+        <ul>
+          <li><strong>랜덤</strong> — 잠금 안 된 슬롯을 무작위로. 제목 잠금이면 본문만 변경</li>
+          <li><strong>스왑</strong> — 제목 ↔ 본문 교환. 잠금이 하나라도 있으면 비활성 + 플래시 메시지</li>
+        </ul>
+      </section>
+
+      <!-- ── 다운로드 ──────────────────── -->
+      <section id="download">
+        <h2>폰트 다운로드</h2>
+        <p>패널 헤더의 <span class="kbd">🔗</span> 버튼을 누르면 작은 팝오버가 떠요. 현재 선택된 폰트에 대해 세 가지 작업을 할 수 있습니다.</p>
+
+        <h3>📋 URL 복사</h3>
+        <p>Google Fonts CSS API의 <code>@import</code> URL을 클립보드로 복사. 예:</p>
+        <code>https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;display=swap</code>
+        <p>HTML <code>&lt;link&gt;</code> 또는 CSS <code>@import</code>로 바로 사용 가능.</p>
+
+        <h3>⬇ 폰트 받기</h3>
+        <p>Google Fonts CSS에서 첫 번째 <code>@font-face</code>의 <code>src url()</code>을 추출해서 fonts.gstatic.com에서 파일을 받아요. 확장자는 CSS의 <code>format()</code> 토큰 기준으로 정확히 결정됩니다.</p>
+        <ul>
+          <li>모던 브라우저 (Chrome / Safari / Firefox / Edge) → <strong>woff2</strong></li>
+          <li>구형 브라우저 (IE 11) → <strong>woff</strong></li>
+          <li>파일명에 정확한 확장자 적용: <code>Playfair-Display.woff2</code></li>
+        </ul>
+        <div class="callout">
+          <strong>TTF가 필요한 경우:</strong> Google Fonts API는 더 이상 TTF를 제공하지 않아요. 디자인 툴(Figma, Sketch, Adobe) 호환을 위해 TTF가 꼭 필요하면 <strong>↗ Google Fonts</strong> 링크로 공식 페이지에서 직접 받으세요.
+        </div>
+
+        <h3>↗ Google Fonts</h3>
+        <p>공식 specimen 페이지를 새 탭으로 열어요. 모든 weight, italic, glyph 미리보기, 그리고 TTF 수동 다운로드가 가능.</p>
+      </section>
+
+      <!-- ── 단축키 ──────────────────── -->
+      <section id="shortcuts">
+        <h2>단축키 &amp; 팁</h2>
+        <table>
+          <thead><tr><th>동작</th><th>단축키</th></tr></thead>
+          <tbody>
+            <tr><td>열린 팝오버 / 피커 닫기</td><td><span class="kbd">ESC</span></td></tr>
+            <tr><td>모든 팝오버 닫기</td><td>바깥 영역 클릭</td></tr>
+            <tr><td>테마 전환 (라이트 ↔ 다크)</td><td>상단 🌙 / ☀️ 버튼</td></tr>
+          </tbody>
+        </table>
+
+        <h3>꿀팁</h3>
+        <ul>
+          <li>🔒 한쪽 잠그고 자동 추천 여러 번 누르기 → 그 폰트에 어울리는 후보군 빠르게 훑기</li>
+          <li>한/영 토글 → 한글/영문 페어 비교에 유용</li>
+          <li>자간 슬라이더: 제목은 -0.02em (타이트), 본문은 0 (기본)부터 시작</li>
+          <li>잠긴 폰트는 추천 카드에서 🔒 표시 — 클릭해도 안 바뀌니 안전하게 비교 가능</li>
+        </ul>
+      </section>
+
+      <!-- ── FAQ ──────────────────── -->
+      <section id="faq">
+        <h2>자주 묻는 질문</h2>
+
+        <div class="qa">
+          <div class="qa__q">Q. 폰트 개수와 조합 수는?</div>
+          <div class="qa__a">
+            98개 폰트 (영문 75 + 한글 23). 5개 카테고리. 추천 가능한 페어 9,506개 (영문 5,550 + 한글 506 + 크로스 스크립트 3,450). 80점 이상 고득점 페어 2,565개. <strong>왜 98개인지에 대한 자세한 선정 기준은 <a href="#curation">폰트 큐레이션</a> 섹션 참고.</strong>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa__q">Q. 점수는 어떻게 매기나요?</div>
+          <div class="qa__a">
+            (1) 카테고리 페어 점수 (가장 큰 비중), (2) 무드 교집합 보너스, (3) 같은 패밀리 보너스, (4) 비추천 조합 감점. 자세한 점수표는 <a href="#tech">기술 노트</a> 참고.
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa__q">Q. 페어링 추천 알고리즘이 뭔가요?</div>
+          <div class="qa__a">
+            휴리스틱 기반 (ML 아님). 타이포그래피 베스트 프랙티스에서 검증된 페어를 점수표로 정의. 자동 추천은 큐레이션 프리셋 5개 + 라이브러리 무작위 추출 50쌍의 상위 4개를 셔플해서 9개 표시.
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa__q">Q. 한글 폰트 추천이 좀 부족한 것 같아요</div>
+          <div class="qa__a">
+            Google Fonts가 제공하는 한글 폰트가 23개로 제한적이에요. Pretendard, Spoqa Han Sans Neo 같은 인기 폰트는 Google Fonts에 없어서 큐레이션에 포함 못 했습니다. 직접 추가하려면 <code>data/fonts.js</code>에 항목을 더하고 <code>app.js</code>의 폰트 라이브러리에 등록하면 돼요.
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa__q">Q. TTF로 다운로드가 안 돼요</div>
+          <div class="qa__a">
+            Google Fonts API는 WOFF2/WOFF만 제공 (User-Agent 기준). 브라우저의 <code>fetch()</code>는 <code>User-Agent</code> 헤더가 forbidden이라 변경 불가능. TTF가 꼭 필요하면 <strong>↗ Google Fonts</strong> 링크로 공식 페이지에서 직접 받기.
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa__q">Q. 배포 URL이 영원한가요?</div>
+          <div class="qa__a">
+            매 배포마다 새 URL이 생성돼요 (이전 URL은 사용 불가). 영구 호스팅이 필요하면 GitHub Pages, Netlify, Vercel, Cloudflare Pages 같은 정적 호스팅 서비스를 추천.
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa__q">Q. 오프라인에서도 쓸 수 있나요?</div>
+          <div class="qa__a">
+            폰트가 Google Fonts CDN에서 로드되기 때문에 인터넷 필요. 오프라인 사용은 정식 호스팅으로 가져간 뒤 <code>fonts.js</code>와 <code>loader.js</code>를 수정해서 로컬 폰트 파일을 가리키게 변경하면 가능.
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 기술 노트 ──────────────────── -->
+      <section id="tech">
+        <h2>기술 노트</h2>
+        <p>이 도구가 어떻게 만들어졌는지 궁금한 분들을 위한 섹션이에요.</p>
+
+        <h3>파일 구조</h3>
+        <pre><code>TypographyMatcher/
+├── index.html          메인 UI
+├── manual.html         이 매뉴얼
+├── styles.css          스타일 (라이트/다크)
+├── data/
+│   └── fonts.js        폰트 데이터 (98개 × 카테고리 × 무드)
+└── js/
+    ├── pairing.js      페어링 점수 엔진
+    ├── loader.js       Google Fonts CSS API 로더
+    └── app.js          UI 와이어링</code></pre>
+
+        <h3>페어링 점수표 (PAIR_SCORE)</h3>
+        <p>제목 → 본문 카테고리 조합별 베이스 점수:</p>
+        <table>
+          <thead><tr><th>제목 → 본문</th><th>점수</th><th>의미</th></tr></thead>
+          <tbody>
+            <tr><td><code>serif</code> → <code>sans-serif</code></td><td>92</td><td>에디토리얼 클래식</td></tr>
+            <tr><td><code>sans-serif</code> → <code>serif</code></td><td>90</td><td>모던 에디토리얼</td></tr>
+            <tr><td><code>display</code> → <code>sans-serif</code></td><td>88</td><td>임팩트 + 가독성</td></tr>
+            <tr><td><code>display</code> → <code>serif</code></td><td>82</td><td>패션 에디토리얼</td></tr>
+            <tr><td><code>monospace</code> → <code>sans-serif</code></td><td>80</td><td>테크 에디토리얼</td></tr>
+            <tr><td><code>handwriting</code> → <code>sans-serif</code></td><td>78</td><td>따뜻함 + 가독</td></tr>
+            <tr><td><code>serif</code> → <code>serif</code></td><td>68</td><td>톤 통일 (의도적)</td></tr>
+            <tr><td><code>monospace</code> → <code>serif</code></td><td>66</td><td>에디토리얼 대비</td></tr>
+            <tr><td><code>sans-serif</code> → <code>sans-serif</code></td><td>64</td><td>톤 통일 (의도적)</td></tr>
+            <tr><td><code>display</code> → <code>display</code></td><td>20</td><td>비추 (overwhelming)</td></tr>
+            <tr><td><code>handwriting</code> ↔ <code>*</code></td><td>10-30</td><td>비추 (clash)</td></tr>
+          </tbody>
+        </table>
+        <p>그 위에 무드 교집합 보너스(1개당 +3, 최대 +9), 같은 패밀리 보너스(+5) 등이 더해져요. 같은 폰트 두 번 추천은 0점으로 컷.</p>
+
+        <h3>Google Fonts API</h3>
+        <ul>
+          <li><strong>CSS API</strong>: <code>https://fonts.googleapis.com/css2?family=Font+Name:wght@400;700&amp;display=swap</code></li>
+          <li>모던 브라우저는 WOFF2, 구형은 WOFF 반환 (User-Agent 기준)</li>
+          <li><code>document.fonts.ready</code>로 폰트 로딩 완료 감지</li>
+          <li>IE 11 미지원</li>
+        </ul>
+
+        <h3>기술 스택</h3>
+        <ul>
+          <li>Vanilla JavaScript (ES2020+) — 프레임워크 없음</li>
+          <li>CSS Custom Properties (테마 시스템)</li>
+          <li>Google Fonts CSS API</li>
+          <li>Canvas API (현재 버전에서는 미사용)</li>
+        </ul>
+        <hr />
+        <p style="color: var(--text-mute); font-size: 13px;">
+          Built with vanilla JS + Google Fonts. 폰트 라이선스는 각 Google Fonts 항목의 라이선스를 따릅니다. 도구 자체 코드는 자유롭게 참고/수정 가능.
+        </p>
+      </section>
+
+    </article>
+  </div>
+
+  <footer class="footer">
+    Typography Matcher · Google Fonts 기반 무료 도구 · 배포 URL은 변경될 수 있어요
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('tm-theme');
+    if (saved) root.dataset.theme = saved;
+    themeBtn.textContent = root.dataset.theme === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('tm-theme', root.dataset.theme);
+      themeBtn.textContent = root.dataset.theme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Active section in TOC
+    const tocLinks = document.querySelectorAll('.toc a');
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
