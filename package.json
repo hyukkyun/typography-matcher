@@ -1,0 +1,21 @@
+{
+  "name": "typography-matcher",
+  "version": "1.0.0",
+  "description": "Google Fonts API 기반 제목-본문 폰트 페어링 추천 도구",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'No build step required for static site'"
+  },
+  "keywords": [
+    "typography",
+    "fonts",
+    "google-fonts",
+    "pairing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
