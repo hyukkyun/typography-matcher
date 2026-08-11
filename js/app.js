@@ -573,7 +573,6 @@
       pickers.title.updateButton();
       pickers.body.updateButton();
       applyFonts();
-      document.querySelector('.preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     grid.appendChild(card);
   }
