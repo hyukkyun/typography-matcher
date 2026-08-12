@@ -505,6 +505,13 @@
     const grid = $('#recGrid');
     grid.innerHTML = '';
 
+    // 필터 조합으로 lib이 비면 — 추천 카드 빈 안내
+    if (filteredLibrary().length === 0) {
+      grid.innerHTML = '<div class="rec-empty">🔍 필터 조합에 폰트가 없어요<br/><span style="font-size:12px">언어나 소스 필터를 바꿔보세요</span></div>';
+      $('#recTitle').textContent = '필터 결과 없음';
+      return;
+    }
+
     if (state.locked.title && state.locked.body) {
       grid.innerHTML = `<div class="rec-empty">🔒 제목과 본문 모두 고정됨<br/><span style="font-size:12px">둘 중 하나를 해제하면 추천이 보여요</span></div>`;
       $('#recTitle').textContent = '🔒 모두 고정됨';
@@ -653,11 +660,17 @@
       return;
     }
     const lib = filteredLibrary();
+    if (lib.length === 0) {
+      flashMessage('🔍 사용 가능한 폰트가 없어요 — 필터를 바꿔보세요');
+      return;
+    }
     if (state.locked.title) {
       const b = pick(lib.filter(f => f.name !== state.titleFont.name && f.category !== 'handwriting'));
+      if (!b) { flashMessage('🔍 사용 가능한 본문 폰트가 없어요'); return; }
       state.bodyFont = b;
     } else if (state.locked.body) {
       const t = pick(lib.filter(f => f.name !== state.bodyFont.name && f.category !== 'handwriting'));
+      if (!t) { flashMessage('🔍 사용 가능한 제목 폰트가 없어요'); return; }
       state.titleFont = t;
     } else {
       const t = pick(lib.filter(f => f.category !== 'handwriting'));
