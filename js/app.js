@@ -189,6 +189,11 @@
       urlEl.textContent = fontImportURL(font);
       pageEl.href = googleFontsPageURL(font);
       pageEl.textContent = font.source === 'noonnu' ? '↗ Noonnu 페이지' : '↗ Google Fonts';
+      // 복사 버튼 라벨도 소스별로 — Noonnu는 @font-face 스니펫이라 'URL 복사'가 부정확
+      const copyBtn = popover.querySelector('button[data-action="copy"]');
+      if (copyBtn) {
+        copyBtn.textContent = font.source === 'noonnu' ? '📋 @font-face 복사' : '📋 URL 복사';
+      }
     }
     function open() {
       refresh();
@@ -218,7 +223,11 @@
       if (!action) return;
       const font = target === 'title' ? state.titleFont : state.bodyFont;
       if (action === 'copy') {
-        copyToClipboard(fontImportURL(font), `📋 ${font.name} @import URL 복사됨`);
+        const isNoonnu = font.source === 'noonnu';
+        const msg = isNoonnu
+          ? `📋 ${font.name} @font-face 코드 복사됨 — CSS에 붙여넣기`
+          : `📋 ${font.name} @import URL 복사됨`;
+        copyToClipboard(fontImportURL(font), msg);
       } else if (action === 'download') {
         downloadFontFile(font);
       }
