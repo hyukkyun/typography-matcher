@@ -184,33 +184,6 @@
         <h3>소스 표시</h3>
         <p>상단 토글에서 <strong>전체 / Google / 눈누</strong>로 필터할 수 있어요. Picker에서 Noonnu 폰트는 <code>N</code> 배지가 붙어서 한눈에 구분됩니다.</p>
 
-        <h3>폰트 추가 / 제거하기</h3>
-        <p>필요에 따라 직접 조정할 수 있어요.</p>
-
-        <h4>A) <code>data/fonts.js</code> (Google) / <code>data/noonnuFonts.js</code> (Noonnu) 직접 편집</h4>
-        <p>배열에 한 줄씩 더하거나 빼면 끝:</p>
-        <pre><code>// Google Fonts 추가 예시
-{ name: 'Fraunces', category: 'serif', weights: [400, 700, 900],
-  mood: ['editorial', 'elegant'], scripts: ['latin'], source: 'google' },
-
-// Noonnu 추가 예시
-{ name: 'MyFont', category: 'sans-serif', weights: [400],
-  mood: ['modern'], scripts: ['korean'], source: 'noonnu',
-  src: 'https://cdn.jsdelivr.net/gh/.../MyFont.woff2',
-  pageUrl: 'https://noonnu.cc/font_page/1234' },</code></pre>
-        <p>수정 후 페이지 새로고침하면 즉시 반영돼요.</p>
-
-        <h4>B) Google Fonts Developer API로 전체 자동 로드</h4>
-        <p>API 키를 발급받아 1,500+ 폰트를 동적으로 가져올 수 있어요.</p>
-        <pre><code>GET https://www.googleapis.com/webfonts/v1/webfonts?key=YOUR_KEY</code></pre>
-        <ul>
-          <li>장점: 1,500+ 다 가져옴, 자동 업데이트</li>
-          <li>단점: API 키 등록 필요, 아랍어/히브리어 등 쓸데없는 것도 다 옴 (필터링 필요), 카테고리는 직접 매핑해야 함</li>
-        </ul>
-
-        <h4>C) Noonnu 인기순 더 가져오기</h4>
-        <p>Noonnu의 <code>?order_by=pd</code> 페이지는 Stimulus 동적 로딩이라 일반 <code>?page=2</code>로는 페이지네이션이 안 돼요. <code>?order_by=pd&page=2</code> 형태로 URL에 page 파라미터를 직접 주면 페이지가 로드되긴 하지만, 각 페이지 HTML을 <code>data/noonnuFonts.js</code>에 수동으로 합치는 방식이 가장 안정적이에요.</p>
-
         <div class="callout">
           <strong>💡 두 소스의 차이:</strong> Google Fonts는 weight가 다양 (예: Inter는 100~900), Noonnu는 단일 weight (400)가 대부분. Noonnu 폰트는 한글 디자인이 강점이라 영문 glyph는 약할 수 있어요. 제목은 한글/디자인 폰트, 본문은 Google Fonts 영문 폰트로 페어링하는 것도 한 방법이에요.
         </div>
