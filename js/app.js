@@ -442,6 +442,9 @@
     window.FontLoader.whenReady([state.titleFont, state.bodyFont]).then(applyStyles);
     applyStyles();
     updateMeta();
+    // Picker 버튼 표시도 새 폰트로 갱신 — Picker 옵션 클릭 시 onSelect → applyFonts만 호출돼서 updateButton이 빠지면 안 됨
+    if (pickers.title) pickers.title.updateButton();
+    if (pickers.body)  pickers.body.updateButton();
   }
 
   function applyStyles() {
