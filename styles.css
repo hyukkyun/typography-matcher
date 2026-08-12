@@ -15,8 +15,8 @@
   --text: #1a1814;
   --text-soft: #6a655d;
   --text-mute: #9a9489;
-  --accent: #d97757;
-  --accent-soft: #fce7dd;
+  --accent: #dc2626;
+  --accent-soft: #fee2e2;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
@@ -33,8 +33,8 @@
   --text: #f4f1ea;
   --text-soft: #b8b1a4;
   --text-mute: #6f6a60;
-  --accent: #e89a7a;
-  --accent-soft: #3a261e;
+  --accent: #f87171;
+  --accent-soft: #451a1a;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
@@ -1080,7 +1080,7 @@ a:hover { text-decoration: underline; }
   gap: 12px;
   margin-top: 20px;
   padding: 14px 16px;
-  background: linear-gradient(135deg, var(--accent) 0%, #e08a4a 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #b91c1c 100%);
   color: #fff;
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -1133,5 +1133,5 @@ a:hover { text-decoration: underline; }
   text-overflow: ellipsis;
 }
 [data-theme="dark"] .store-banner {
-  background: linear-gradient(135deg, #b8624a 0%, #c97a3e 100%);
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
 }
