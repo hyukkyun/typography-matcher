@@ -227,19 +227,17 @@ window.PairingEngine = (function () {
     const availKorean = inLib(koreanPresets);
     const availNoonnu = inLib(noonnuPresets);
 
-    if (script === 'korean') return availKorean.slice(0, n);
-    if (script === 'latin')  return availLatin.slice(0, n);
-    // all: 가능한 풀에서 골고루
-    // source가 'noonnu'면 noonnu 중심, 'google'이면 google 중심
-    let pool = [];
-    if (source === 'noonnu') {
-      pool = [...availNoonnu, ...availKorean, ...availLatin];
-    } else if (source === 'google') {
-      pool = [...availLatin, ...availKorean, ...availNoonnu];
-    } else {
-      pool = [...availKorean, ...availLatin, ...availNoonnu];
-    }
-    return pool.slice(0, n);
+    // lib에 존재하는 모든 preset. script/source는 우선순위 힌트로만 사용.
+    // (이전: script=latin이면 latin만 early-return → source=noonnu+script=latin에서 0개 됨)
+    const all = [...new Map(
+      [...availKorean, ...availLatin, ...availNoonnu]
+        .map(p => [p.title + '→' + p.body, p])
+    ).values()];
+    const noonnuKeys = new Set(availNoonnu.map(p => p.title + '→' + p.body));
+    const ordered = source === 'noonnu'
+      ? [...availNoonnu, ...all.filter(p => !noonnuKeys.has(p.title + '→' + p.body))]
+      : all;
+    return ordered.slice(0, n);
   }
 
   return { score, recommendBodies, recommendTitles, autoPair, explain };
