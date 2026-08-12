@@ -1072,3 +1072,72 @@ a:hover { text-decoration: underline; }
   .modal__body .toc { display: none; }
   .modal__container { max-height: 95vh; }
 }
+
+/* ── Store banner (사이드바 하단) ─────────────────── */
+.store-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, var(--accent) 0%, #e08a4a 100%);
+  color: #fff;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  overflow: hidden;
+  position: relative;
+}
+.store-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.store-banner:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.store-banner__icon {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.store-banner__text {
+  flex: 1;
+  min-width: 0;
+}
+.store-banner__title {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.1px;
+}
+.store-banner__sub {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 2px;
+  opacity: 0.9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+[data-theme="dark"] .store-banner {
+  background: linear-gradient(135deg, #b8624a 0%, #c97a3e 100%);
+}
