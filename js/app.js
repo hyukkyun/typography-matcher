@@ -28,7 +28,9 @@
   const DEFAULTS = {
     all:    { title: 'Playfair Display', body: 'Source Sans 3' },
     korean: { title: 'Noto Serif KR',    body: 'Noto Sans KR' },
-    latin:  { title: 'Playfair Display', body: 'Source Sans 3' }
+    latin:  { title: 'Playfair Display', body: 'Source Sans 3' },
+    google: { title: 'Playfair Display', body: 'Source Sans 3' },
+    noonnu: { title: 'Pretendard',      body: 'KoPubDotum' }
   };
 
   const state = {
@@ -427,13 +429,15 @@
       b.setAttribute('aria-selected', active ? 'true' : 'false');
     });
 
-    // 현재 선택된 폰트가 새 소스에 없으면 → DEFAULTS.all로 fallback
+    // 현재 선택된 폰트가 새 소스에 없으면 → 소스별 기본 페어로 fallback
+    // (이전엔 DEFAULTS.all을 썼는데, all도 Google 폰트라 source=noonnu로 바꿔도 Google 폰트가 남는 어색함)
     const lib = filteredLibrary();
-    if (!lib.find(f => f.name === state.titleFont.name)) {
-      state.titleFont = findFont(DEFAULTS.all.title);
+    const def = DEFAULTS[source] || DEFAULTS.all;
+    if (source !== 'all' && !lib.find(f => f.name === state.titleFont.name)) {
+      state.titleFont = findFont(def.title);
     }
-    if (!lib.find(f => f.name === state.bodyFont.name)) {
-      state.bodyFont = findFont(DEFAULTS.all.body);
+    if (source !== 'all' && !lib.find(f => f.name === state.bodyFont.name)) {
+      state.bodyFont = findFont(def.body);
     }
 
     pickers.title.renderOptions();
