@@ -168,11 +168,14 @@ window.PairingEngine = (function () {
 
   /**
    * "Auto" 추천 — 카테고리만 고르면 그 안에서 잘 어울리는 페어 생성.
-   * @param {Array}  library  - 전체 폰트
+   * library 안에 있는 폰트만 반환 (source/script 필터 통과한 페어만).
+   *
+   * @param {Array}  library  - 호출자가 필터링한 폰트 풀 (filteredLibrary() 결과)
    * @param {Number} n        - 반환 개수
    * @param {String} script   - 'all' | 'korean' | 'latin' — 현재 언어 필터
+   * @param {String} source   - 'all' | 'google' | 'noonnu' — 현재 소스 필터 (선택)
    */
-  function autoPair(library, n = 6, script = 'all') {
+  function autoPair(library, n = 6, script = 'all', source = 'all') {
     const latinPresets = [
       { title: 'Playfair Display',  body: 'Source Sans 3',     reason: '에디토리얼 클래식' },
       { title: 'Montserrat',        body: 'Merriweather',      reason: '모던 에디토리얼' },
@@ -186,7 +189,7 @@ window.PairingEngine = (function () {
       { title: 'JetBrains Mono',    body: 'IBM Plex Sans',     reason: '개발자 에디토리얼' }
     ];
 
-    // 한국어 추천 페어 — 명조+고딕 대비를 기본으로, 캐주얼+임팩트 보조
+    // 한국어 추천 페어 — Google Fonts 한글
     const koreanPresets = [
       { title: 'Noto Serif KR',     body: 'Noto Sans KR',      reason: '명조 + 고딕 클래식' },
       { title: 'Nanum Myeongjo',    body: 'Nanum Gothic',      reason: '전통 명조 + 깔끔 고딕' },
@@ -200,12 +203,43 @@ window.PairingEngine = (function () {
       { title: 'Nanum Gothic Coding', body: 'Nanum Gothic',     reason: '코드 + 본문 — 개발자' }
     ];
 
-    if (script === 'korean') return koreanPresets.slice(0, n);
-    if (script === 'latin')  return latinPresets.slice(0, n);
-    // all: 섞어서
-    return koreanPresets.slice(0, Math.ceil(n / 2))
-      .concat(latinPresets.slice(0, Math.floor(n / 2)))
-      .slice(0, n);
+    // Noonnu 인기 한글 페어 — 눈누 필터에서 추천
+    const noonnuPresets = [
+      { title: 'Pretendard',        body: 'SUIT',              reason: '모던 고딕 페어' },
+      { title: 'Paperlogy',         body: 'KoPubDotum',        reason: '강한 제목 + 가독 본문' },
+      { title: 'GmarketSans',       body: 'S-CoreDream',       reason: '친근 + 깔끔' },
+      { title: 'SUIT',              body: 'LeeSeoyun',         reason: '모던 + 따뜻' },
+      { title: 'ChosunGu',          body: 'KoPubDotum',        reason: '전통 명조 + 고딕' },
+      { title: 'memomentKkukKkuk',  body: 'Pretendard',        reason: '캐주얼 + 깔끔' },
+      { title: 'LeeSeoyun',         body: 'S-CoreDream',       reason: '따뜻 + 깔끔' },
+      { title: 'NotoSerifKR',       body: 'KoPubDotum',        reason: '에디토리얼 명조' },
+      { title: 'Ownglyph_ParkDaHyun', body: 'Pretendard',      reason: '손글씨 + 모던' },
+      { title: 'Gyeonggi_Title',    body: 'Gyeonggi_Batang',   reason: '경기체 페어' }
+    ];
+
+    // library에 실제로 존재하는 페어만 남기기 — source/script 필터링 우회 방지
+    const nameSet = new Set(library.map(f => f.name));
+    const inLib = presets => presets.filter(p =>
+      nameSet.has(p.title) && nameSet.has(p.body)
+    );
+
+    const availLatin  = inLib(latinPresets);
+    const availKorean = inLib(koreanPresets);
+    const availNoonnu = inLib(noonnuPresets);
+
+    if (script === 'korean') return availKorean.slice(0, n);
+    if (script === 'latin')  return availLatin.slice(0, n);
+    // all: 가능한 풀에서 골고루
+    // source가 'noonnu'면 noonnu 중심, 'google'이면 google 중심
+    let pool = [];
+    if (source === 'noonnu') {
+      pool = [...availNoonnu, ...availKorean, ...availLatin];
+    } else if (source === 'google') {
+      pool = [...availLatin, ...availKorean, ...availNoonnu];
+    } else {
+      pool = [...availKorean, ...availLatin, ...availNoonnu];
+    }
+    return pool.slice(0, n);
   }
 
   return { score, recommendBodies, recommendTitles, autoPair, explain };

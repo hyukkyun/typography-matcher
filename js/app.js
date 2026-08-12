@@ -536,10 +536,11 @@
     const seen = new Set();
     const PE = window.PairingEngine;
 
-    const presets = PE.autoPair(lib, 5, state.script);
+    // autoPair에 source 전달 + lib 안에서만 lookup (source/script 필터 우회 방지)
+    const presets = PE.autoPair(lib, 5, state.script, state.source);
     presets.forEach(p => {
-      const t = findFont(p.title);
-      const b = findFont(p.body);
+      const t = lib.find(f => f.name === p.title);
+      const b = lib.find(f => f.name === p.body);
       if (!t || !b) return;
       const key = `${t.name}→${b.name}`;
       if (seen.has(key)) return;
