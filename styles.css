@@ -136,6 +136,61 @@ a:hover { text-decoration: underline; }
 }
 .lang-toggle__btn--active[data-script="korean"] { color: var(--accent); }
 
+/* ── Source toggle (Google Fonts / Noonnu) ────────── */
+.source-toggle {
+  display: inline-flex;
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+.source-toggle__btn {
+  padding: 6px 12px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mute);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+  white-space: nowrap;
+}
+.source-toggle__btn:hover { color: var(--text); }
+.source-toggle__btn--active {
+  background: var(--bg-elev);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.source-toggle__btn--active[data-source="noonnu"] { color: var(--accent); }
+.source-toggle__btn--active[data-source="google"] { color: #4285f4; }
+
+/* ── Noonnu source badge ──────────────────────────── */
+.font-picker__badge,
+.rec-card__badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 5px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 3px;
+  vertical-align: middle;
+  line-height: 1.4;
+  user-select: none;
+}
+.rec-card__badge {
+  font-size: 10px;
+  padding: 1px 6px;
+  margin-right: 4px;
+}
+.font-picker__option--noonnu {
+  /* Noonnu 폰트 옵션 살짝 강조 — 매우 옅게 */
+  background: linear-gradient(90deg, transparent, rgba(255, 200, 0, 0.04));
+}
+
 /* ── Buttons ─────────────────────────────────────── */
 .btn {
   font-family: var(--font-ui);

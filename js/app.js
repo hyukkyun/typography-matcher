@@ -42,6 +42,7 @@
     bodyLetterSpacing: 0,
     theme: 'light',
     script: 'all',
+    source: 'all',  // 'all' | 'google' | 'noonnu'
     customTitle: SAMPLES.latin.title,
     customBody: SAMPLES.latin.body,
     userEdited: { title: false, body: false },
@@ -79,8 +80,8 @@
     setupFontLinkButton('title');
     setupFontLinkButton('body');
 
-    // 백그라운드로 모든 폰트 프리로드
-    setTimeout(() => window.FontLoader.preload(window.FONT_LIBRARY), 1500);
+    // 백그라운드로 모든 폰트 프리로드 (Google + Noonnu)
+    setTimeout(() => window.FontLoader.preload(getLibrary()), 1500);
   }
 
   // ── 커스텀 폰트 피커 ─────────────────────────────────
@@ -109,10 +110,12 @@
           const opt = document.createElement('button');
           opt.type = 'button';
           opt.className = 'font-picker__option';
+          if (font.source === 'noonnu') opt.classList.add('font-picker__option--noonnu');
           if (font.name === currentFont.name) opt.classList.add('font-picker__option--active');
           opt.dataset.value = font.name;
           opt.style.fontFamily = `"${font.name}", ${fallback(font.category)}`;
-          opt.textContent = font.name;
+          const badge = font.source === 'noonnu' ? '<span class="font-picker__badge">N</span>' : '';
+          opt.innerHTML = `${badge}${escape(font.name)}`;
           opt.addEventListener('click', () => {
             onSelect(font.name);
             close();
@@ -141,7 +144,8 @@
     function updateButton() {
       const f = target === 'title' ? state.titleFont : state.bodyFont;
       current.style.fontFamily = `"${f.name}", ${fallback(f.category)}`;
-      current.textContent = f.name;
+      const badge = f.source === 'noonnu' ? '<span class="font-picker__badge">N</span>' : '';
+      current.innerHTML = `${badge}${escape(f.name)}`;
       btn.disabled = state.locked[target];
       root.classList.toggle('font-picker--locked', state.locked[target]);
     }
@@ -184,6 +188,7 @@
       const font = target === 'title' ? state.titleFont : state.bodyFont;
       urlEl.textContent = fontImportURL(font);
       pageEl.href = googleFontsPageURL(font);
+      pageEl.textContent = font.source === 'noonnu' ? '↗ Noonnu 페이지' : '↗ Google Fonts';
     }
     function open() {
       refresh();
@@ -333,6 +338,10 @@
     $$('.lang-toggle__btn').forEach(btn => {
       btn.addEventListener('click', () => setScript(btn.dataset.script));
     });
+
+    $$('.source-toggle__btn').forEach(btn => {
+      btn.addEventListener('click', () => setSource(btn.dataset.source));
+    });
   }
 
   function bindSlider(id, onChange, format, valId) {
@@ -398,6 +407,34 @@
     runAuto();
   }
 
+  // ── 소스 필터 (Google Fonts / Noonnu) ───────────────
+  function setSource(source) {
+    if (source === state.source) return;
+    state.source = source;
+
+    $$('.source-toggle__btn').forEach(b => {
+      const active = b.dataset.source === source;
+      b.classList.toggle('source-toggle__btn--active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    // 현재 선택된 폰트가 새 소스에 없으면 → DEFAULTS.all로 fallback
+    const lib = filteredLibrary();
+    if (!lib.find(f => f.name === state.titleFont.name)) {
+      state.titleFont = findFont(DEFAULTS.all.title);
+    }
+    if (!lib.find(f => f.name === state.bodyFont.name)) {
+      state.bodyFont = findFont(DEFAULTS.all.body);
+    }
+
+    pickers.title.renderOptions();
+    pickers.body.renderOptions();
+    pickers.title.updateButton();
+    pickers.body.updateButton();
+    applyFonts();
+    runAuto();
+  }
+
   // ── 폰트/스타일 적용 ─────────────────────────────────
   function applyFonts() {
     if (!state.titleFont || !state.bodyFont) return;
@@ -443,8 +480,21 @@
   }
 
   function filteredLibrary() {
-    if (state.script === 'all') return window.FONT_LIBRARY;
-    return window.FONT_LIBRARY.filter(f => (f.scripts || ['latin']).includes(state.script));
+    let lib = getLibrary();
+    if (state.script !== 'all') {
+      lib = lib.filter(f => (f.scripts || ['latin']).includes(state.script));
+    }
+    if (state.source !== 'all') {
+      lib = lib.filter(f => (f.source || 'google') === state.source);
+    }
+    return lib;
+  }
+
+  function getLibrary() {
+    return [
+      ...(window.FONT_LIBRARY || []),
+      ...(window.NOONNU_FONT_LIBRARY || [])
+    ];
   }
 
   // ── 추천 ─────────────────────────────────────────────
@@ -550,16 +600,18 @@
     const card = document.createElement('button');
     card.className = 'rec-card';
     card.type = 'button';
+    const titleBadge = title.source === 'noonnu' ? '<span class="rec-card__badge">N</span>' : '';
+    const bodyBadge  = body.source  === 'noonnu' ? '<span class="rec-card__badge">N</span>' : '';
     card.innerHTML = `
       <div class="rec-card__head">
         <span class="rec-card__reason">${escape(reason)}</span>
         <span class="rec-card__score">${score}</span>
       </div>
       <div class="rec-card__title" style="font-family: '${title.name}', ${fallback(title.category)}; font-weight: 700; ${isTitleLocked ? 'opacity:0.45;' : ''}">
-        ${escape(title.name)}${isTitleLocked ? ' 🔒' : ''}
+        ${titleBadge}${escape(title.name)}${isTitleLocked ? ' 🔒' : ''}
       </div>
       <div class="rec-card__body" style="font-family: '${body.name}', ${fallback(body.category)}; ${isBodyLocked ? 'opacity:0.45;' : ''}">
-        ${escape(body.name)}${isBodyLocked ? ' 🔒' : ''}
+        ${bodyBadge}${escape(body.name)}${isBodyLocked ? ' 🔒' : ''}
       </div>
       <div class="rec-card__cats">
         <span>${window.CATEGORY_LABEL[title.category]}</span>
@@ -629,13 +681,34 @@
   }
 
   // ── 폰트 링크 / 다운로드 ────────────────────────────
+  /**
+   * Google Fonts → @import URL (CSS API)
+   * Noonnu        → @font-face 스니펫 (jsdelivr .woff URL이라 @import 불가)
+   */
   function fontImportURL(font) {
+    if (font.source === 'noonnu') {
+      const fmt = /\.woff2(\?|$)/i.test(font.src) ? 'woff2'
+                : /\.woff(\?|$)/i.test(font.src)  ? 'woff'
+                : /\.otf(\?|$)/i.test(font.src)   ? 'opentype'
+                : 'truetype';
+      return (
+        "@font-face {\n" +
+        `  font-family: '${font.name}';\n` +
+        `  src: url('${font.src}') format('${fmt}');\n` +
+        "  font-display: swap;\n" +
+        "}"
+      );
+    }
     const family = encodeURIComponent(font.name).replace(/%20/g, '+');
     const weights = font.weights.join(';');
     return `https://fonts.googleapis.com/css2?family=${family}:wght@${weights}&display=swap`;
   }
 
+  /** Google Fonts 페이지 / Noonnu 상세 페이지 */
   function googleFontsPageURL(font) {
+    if (font.source === 'noonnu') {
+      return font.pageUrl || `https://noonnu.cc/`;
+    }
     return `https://fonts.google.com/specimen/${encodeURIComponent(font.name).replace(/%20/g, '+')}`;
   }
 
@@ -650,33 +723,41 @@
   };
 
   /**
-   * Google Fonts CSS를 fetch → 첫 번째 @font-face의 src url + format() 추출 → fetch → 다운로드.
+   * Noonnu: src URL에서 직접 fetch (jsdelivr CORS 허용)
+   * Google: CSS fetch → 첫 번째 @font-face의 src url + format() 추출 → fetch → 다운로드
    *
    * Google Fonts API는 User-Agent 기준으로 포맷을 결정:
    *   - 모던 브라우저 (Chrome/Firefox/Safari/Edge) → woff2
    *   - IE 11 등 옛날 브라우저                      → ttf
-   *   - 일부 모바일                                  → ttf
    *
    * 브라우저의 fetch()는 User-Agent 헤더를 설정할 수 없어서 (forbidden header)
    * TTF를 강제로 받을 방법은 없음. 그래서 받은 그대로 저장.
    * WOFF2가 사실 더 작고 효율적이라 웹용으로는 더 권장됨.
-   * TTF가 꼭 필요하면 Google Fonts 페이지에서 직접 받으면 됨.
    */
   async function downloadFontFile(font) {
     try {
       flashMessage(`⬇ ${font.name} 다운로드 중…`);
-      const cssRes = await fetch(fontImportURL(font));
-      if (!cssRes.ok) throw new Error('CSS 요청 실패 (' + cssRes.status + ')');
-      const css = await cssRes.text();
 
-      // 첫 번째 @font-face의 src url() 추출
-      const urlMatch = css.match(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/);
-      if (!urlMatch) throw new Error('폰트 파일 URL을 찾을 수 없음');
-      const fileURL = urlMatch[1];
+      let fileURL, format;
 
-      // format() 토큰으로 실제 포맷 확인 (url 확장자보다 신뢰성 높음)
-      const formatMatch = css.match(/url\([^)]+\)\s+format\(['"]?([\w-]+)['"]?\)/);
-      const format = formatMatch ? formatMatch[1] : 'truetype';
+      if (font.source === 'noonnu') {
+        fileURL = font.src;
+        if (/\.woff2(\?|$)/i.test(fileURL)) format = 'woff2';
+        else if (/\.woff(\?|$)/i.test(fileURL)) format = 'woff';
+        else if (/\.otf(\?|$)/i.test(fileURL))  format = 'opentype';
+        else format = 'truetype';
+      } else {
+        const cssRes = await fetch(fontImportURL(font));
+        if (!cssRes.ok) throw new Error('CSS 요청 실패 (' + cssRes.status + ')');
+        const css = await cssRes.text();
+
+        const urlMatch = css.match(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/);
+        if (!urlMatch) throw new Error('폰트 파일 URL을 찾을 수 없음');
+        fileURL = urlMatch[1];
+        const formatMatch = css.match(/url\([^)]+\)\s+format\(['"]?([\w-]+)['"]?\)/);
+        format = formatMatch ? formatMatch[1] : 'truetype';
+      }
+
       const ext = FORMAT_TO_EXT[format] || (fileURL.match(/\.(\w+)$/) || [, 'ttf'])[1];
 
       const fileRes = await fetch(fileURL);
@@ -691,8 +772,7 @@
       a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 100);
 
-      // TTF 외 포맷이면 TTF 받는 법 안내
-      const hint = format === 'truetype' ? '' : ' · TTF가 필요하면 Google Fonts 페이지에서 받으세요';
+      const hint = format === 'truetype' ? '' : ' · TTF가 필요하면 페이지에서 직접 받으세요';
       flashMessage(`✅ ${font.name}.${ext} (${format})${hint}`);
     } catch (e) {
       console.error(e);
@@ -742,7 +822,7 @@
   }
 
   function findFont(name) {
-    return window.FONT_LIBRARY.find(f => f.name === name);
+    return getLibrary().find(f => f.name === name);
   }
 
   function toggleTheme() {

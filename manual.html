@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>사용법 — Typography Matcher</title>
-  <meta name="description" content="Typography Matcher 매뉴얼. Google Fonts 페어링 추천 도구의 모든 기능과 사용법." />
+  <meta name="description" content="Typography Matcher 매뉴얼. Google Fonts + Noonnu 한글 폰트 페어링 추천 도구의 모든 기능과 사용법." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,21 +55,21 @@
 
       <div class="hero">
         <h1>Typography Matcher 사용법</h1>
-        <p>Google Fonts의 100여 개 폰트로 제목-본문 페어를 추천받고, 라이브 미리보기, 잠금 추천, 폰트 다운로드까지 한 곳에서.</p>
+        <p>Google Fonts 98선 + Noonnu 인기 한글 폰트 100선, 총 198개로 제목-본문 페어를 추천받고, 라이브 미리보기, 잠금 추천, 폰트 다운로드까지 한 곳에서.</p>
       </div>
 
       <!-- ── 시작하기 ──────────────────── -->
       <section id="intro">
         <h2>시작하기</h2>
-        <p>Typography Matcher는 Google Fonts의 카테고리(Serif / Sans-serif / Display / Handwriting / Monospace)별 약 100여 개 폰트를 큐레이션하고, 카테고리 대비 + 무드 매칭 알고리즘으로 어울리는 제목-본문 조합을 추천해주는 무료 웹 도구예요.</p>
+        <p>Typography Matcher는 <strong>Google Fonts 98선 + Noonnu 인기 한글 폰트 100선</strong>을 큐레이션하고, 카테고리 대비 + 무드 매칭 알고리즘으로 어울리는 제목-본문 조합을 추천해주는 무료 웹 도구예요. 영문/국제 폰트는 Google Fonts에서, 한글 폰트는 Noonnu(눈누)에서 가져옵니다.</p>
         <ul>
-          <li>한/영 폰트 98개 — 영문 75, 한글 23</li>
-          <li>5개 카테고리, 추천 가능한 페어 9,506개</li>
+          <li>총 198개 — Google Fonts 98 + Noonnu 100</li>
+          <li>5개 카테고리 (Serif / Sans-serif / Display / Handwriting / Monospace)</li>
           <li>다크 모드, 잠금 추천, 라이브 미리보기</li>
-          <li>폰트별 <code>@import</code> URL 복사 / WOFF2 파일 다운로드</li>
+          <li>폰트별 <code>@import</code> URL 또는 <code>@font-face</code> 스니펫 복사 / WOFF2 파일 다운로드</li>
         </ul>
         <div class="callout">
-          <strong>백엔드 없음.</strong> 모든 폰트는 Google Fonts CDN에서 직접 로드. 설치, 로그인, 회원가입 없이 바로 사용 가능.
+          <strong>두 폰트 CDN.</strong> Google Fonts는 Google CDN, Noonnu는 jsdelivr CDN에서 직접 로드. 설치, 로그인, 회원가입 없이 바로 사용 가능.
         </div>
       </section>
 
@@ -141,55 +141,56 @@
 
       <!-- ── 폰트 큐레이션 ──────────────────── -->
       <section id="curation">
-        <h2>폰트 큐레이션 (왜 98개?)</h2>
-        <p>Google Fonts 전체 카탈로그는 <strong>1,500개+</strong> 입니다. 이 중 98개를 선별한 데에는 의도적인 큐레이션 원칙이 있어요. 숫자 자체에 깊은 의미는 없고, 카테고리 균형과 실용성을 우선해서 채우다 보니 98에서 멈춘 거예요.</p>
+        <h2>폰트 큐레이션 (왜 198개?)</h2>
+        <p>두 폰트 소스를 합쳐서 총 <strong>198개</strong>를 제공해요.</p>
+        <ul>
+          <li><strong>Google Fonts 98선</strong> — 영문/국제 폰트 중심. Playfair Display, Inter, Roboto, Bebas Neue, JetBrains Mono 같은 검증된 디자이너 폰트.</li>
+          <li><strong>Noonnu 인기 100선</strong> — 한국에서 가장 인기 있는 한글 폰트. Pretendard, Paperlogy, GmarketSans, SUIT, S-CoreDream, LeeSeoyun, KoPubDotum 등.</li>
+        </ul>
+        <p>Google Fonts가 한글 폰트를 23개만 제공하는 반면, Noonnu는 수백 개의 한글 폰트를 보유한 한글 폰트 전문 큐레이션 사이트예요. 두 소스를 합쳐서 한/영 + 인기/클래식 폭넓게 커버합니다.</p>
 
         <h3>5가지 선정 기준</h3>
         <ol>
-          <li><strong>언어 한정</strong> — 라틴 + 한글 위주. 아랍어 / 히브리어 / 태국어 / 데바나가리 / 티벳어 등 다른 문자 체계 폰트는 제외 (도구 용도와 안 맞음)</li>
-          <li><strong>잘 알려진 폰트</strong> — Playfair Display, Inter, Roboto, Bebas Neue, JetBrains Mono 처럼 디자이너들 사이에서 검증된 것 위주</li>
+          <li><strong>언어 한정</strong> — 라틴 + 한글 위주. 아랍어 / 히브리어 / 태국어 / 데바나가리 / 티벳어 등 다른 문자 체계 폰트는 제외</li>
+          <li><strong>잘 알려진 폰트</strong> — 디자이너들 사이에서 검증된 것 위주 (Google Fonts) + Noonnu 인기순 상위 100위 (한글)</li>
           <li><strong>카테고리 균형</strong> — 5개 카테고리 × 라틴/한글 매트릭스에서 비어있는 칸 없이</li>
-          <li><strong>무드 다양성</strong> — editorial / friendly / tech / classic / retro 등 다양한 분위기 커버</li>
+          <li><strong>무드 다양성</strong> — editorial / friendly / tech / classic / retro / playful 등 다양한 분위기 커버</li>
           <li><strong>실용성</strong> — 실제로 프로젝트에 쓸 법한 것. 너무 특수한 폰트(예: 한 weight만 있거나 너무 장식적인 것) 제외</li>
         </ol>
 
-        <h3>카테고리 분포</h3>
+        <h3>소스별 카테고리 분포</h3>
         <table>
           <thead>
-            <tr><th>카테고리</th><th>라틴</th><th>한글</th><th>합계</th></tr>
+            <tr><th>카테고리</th><th>Google Fonts</th><th>Noonnu</th><th>합계</th></tr>
           </thead>
           <tbody>
-            <tr><td>Serif</td><td>19</td><td>4</td><td>23</td></tr>
-            <tr><td>Sans-serif</td><td>21</td><td>6</td><td>27</td></tr>
-            <tr><td>Display</td><td>14</td><td>5</td><td>19</td></tr>
-            <tr><td>Handwriting</td><td>12</td><td>6</td><td>18</td></tr>
-            <tr><td>Monospace</td><td>9</td><td>2</td><td>11</td></tr>
-            <tr><td><strong>합계</strong></td><td><strong>75</strong></td><td><strong>23</strong></td><td><strong>98</strong></td></tr>
+            <tr><td>Serif</td><td>23</td><td>12</td><td>35</td></tr>
+            <tr><td>Sans-serif</td><td>27</td><td>70</td><td>97</td></tr>
+            <tr><td>Display</td><td>19</td><td>4</td><td>23</td></tr>
+            <tr><td>Handwriting</td><td>18</td><td>13</td><td>31</td></tr>
+            <tr><td>Monospace</td><td>11</td><td>1</td><td>12</td></tr>
+            <tr><td><strong>합계</strong></td><td><strong>98</strong></td><td><strong>100</strong></td><td><strong>198</strong></td></tr>
           </tbody>
         </table>
 
-        <h3>왜 1,500개가 아니라 98개?</h3>
-        <table>
-          <thead><tr><th>규모</th><th>이득</th><th>손해</th></tr></thead>
-          <tbody>
-            <tr><td>50개 (줄임)</td><td>피커 가벼움, 추천 품질 ↑ (엄선)</td><td>선택지 부족</td></tr>
-            <tr><td><strong>98개 (현재)</strong></td><td>균형 잡힌 큐레이션</td><td>특수한 폰트 없는 경우 있음</td></tr>
-            <tr><td>200개 (확장)</td><td>선택지 풍성</td><td>피커 스크롤 길어짐, 프리로드 트래픽 ↑</td></tr>
-            <tr><td>1,500개+ (전체)</td><td>다 있음</td><td>노이즈, 추천 품질 ↓, 아랍어 등 불필요</td></tr>
-          </tbody>
-        </table>
+        <h3>소스 표시</h3>
+        <p>상단 토글에서 <strong>전체 / Google / 눈누</strong>로 필터할 수 있어요. Picker에서 Noonnu 폰트는 <code>N</code> 배지가 붙어서 한눈에 구분됩니다.</p>
 
         <h3>폰트 추가 / 제거하기</h3>
         <p>필요에 따라 직접 조정할 수 있어요.</p>
 
-        <h4>A) <code>data/fonts.js</code> 직접 편집 (가장 간단)</h4>
+        <h4>A) <code>data/fonts.js</code> (Google) / <code>data/noonnuFonts.js</code> (Noonnu) 직접 편집</h4>
         <p>배열에 한 줄씩 더하거나 빼면 끝:</p>
-        <pre><code>// 추가 예시
+        <pre><code>// Google Fonts 추가 예시
 { name: 'Fraunces', category: 'serif', weights: [400, 700, 900],
-  mood: ['editorial', 'elegant'], scripts: ['latin'] },
+  mood: ['editorial', 'elegant'], scripts: ['latin'], source: 'google' },
 
-// 제거 예시 — 해당 줄을 통째로 삭제</code></pre>
-        <p>수정 후 페이지 새로고침하면 즉시 반영돼요. 폰트는 자동으로 로드되고 추천 풀에도 포함됩니다.</p>
+// Noonnu 추가 예시
+{ name: 'MyFont', category: 'sans-serif', weights: [400],
+  mood: ['modern'], scripts: ['korean'], source: 'noonnu',
+  src: 'https://cdn.jsdelivr.net/gh/.../MyFont.woff2',
+  pageUrl: 'https://noonnu.cc/font_page/1234' },</code></pre>
+        <p>수정 후 페이지 새로고침하면 즉시 반영돼요.</p>
 
         <h4>B) Google Fonts Developer API로 전체 자동 로드</h4>
         <p>API 키를 발급받아 1,500+ 폰트를 동적으로 가져올 수 있어요.</p>
@@ -199,11 +200,11 @@
           <li>단점: API 키 등록 필요, 아랍어/히브리어 등 쓸데없는 것도 다 옴 (필터링 필요), 카테고리는 직접 매핑해야 함</li>
         </ul>
 
-        <h4>C) <code>?subsets=</code> 필터로 부분만 가져오기</h4>
-        <p>API 호출 시 <code>?subsets=latin,korean</code>으로 필터하면 라틴+한글만 약 600개. 추천 풀도 풍성해지고 스크롤도 감당 가능.</p>
+        <h4>C) Noonnu 인기순 더 가져오기</h4>
+        <p>Noonnu의 <code>?order_by=pd</code> 페이지는 Stimulus 동적 로딩이라 일반 <code>?page=2</code>로는 페이지네이션이 안 돼요. <code>?order_by=pd&page=2</code> 형태로 URL에 page 파라미터를 직접 주면 페이지가 로드되긴 하지만, 각 페이지 HTML을 <code>data/noonnuFonts.js</code>에 수동으로 합치는 방식이 가장 안정적이에요.</p>
 
         <div class="callout">
-          <strong>💡 추천:</strong> 지금 98개에 "없는 게 뭐가 있었으면 좋겠어?" 가 더 생산적인 질문이에요. 자주 쓰는 폰트나 추가하고 싶은 무드가 있으면 <code>data/fonts.js</code>에 직접 추가하는 게 가장 빠르고 안전해요. 카테고리별 5~10개씩 더 추가하면 130~150개 정도가 추천 적정선이에요.
+          <strong>💡 두 소스의 차이:</strong> Google Fonts는 weight가 다양 (예: Inter는 100~900), Noonnu는 단일 weight (400)가 대부분. Noonnu 폰트는 한글 디자인이 강점이라 영문 glyph는 약할 수 있어요. 제목은 한글/디자인 폰트, 본문은 Google Fonts 영문 폰트로 페어링하는 것도 한 방법이에요.
         </div>
       </section>
 
@@ -279,26 +280,37 @@
       <!-- ── 다운로드 ──────────────────── -->
       <section id="download">
         <h2>폰트 다운로드</h2>
-        <p>패널 헤더의 <span class="kbd">🔗</span> 버튼을 누르면 작은 팝오버가 떠요. 현재 선택된 폰트에 대해 세 가지 작업을 할 수 있습니다.</p>
+        <p>패널 헤더의 <span class="kbd">🔗</span> 버튼을 누르면 작은 팝오버가 떠요. 현재 선택된 폰트에 대해 세 가지 작업을 할 수 있습니다. 소스(Google / Noonnu)에 따라 동작이 조금 달라요.</p>
 
-        <h3>📋 URL 복사</h3>
-        <p>Google Fonts CSS API의 <code>@import</code> URL을 클립보드로 복사. 예:</p>
+        <h3>📋 URL / 코드 복사</h3>
+        <p><strong>Google Fonts</strong> — CSS API의 <code>@import</code> URL을 클립보드로 복사:</p>
         <code>https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;display=swap</code>
         <p>HTML <code>&lt;link&gt;</code> 또는 CSS <code>@import</code>로 바로 사용 가능.</p>
+        <p><strong>Noonnu</strong> — jsdelivr CDN은 .woff/.woff2 파일이라 <code>@import</code>로 못 씁니다. 대신 <code>@font-face</code> 스니펫을 복사:</p>
+        <pre><code>@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
+  font-display: swap;
+}</code></pre>
+        <p>이걸 본인 CSS에 붙여넣고 <code>font-family: 'Pretendard', sans-serif;</code>로 사용.</p>
 
         <h3>⬇ 폰트 받기</h3>
-        <p>Google Fonts CSS에서 첫 번째 <code>@font-face</code>의 <code>src url()</code>을 추출해서 fonts.gstatic.com에서 파일을 받아요. 확장자는 CSS의 <code>format()</code> 토큰 기준으로 정확히 결정됩니다.</p>
+        <p><strong>Google Fonts</strong> — Google Fonts CSS에서 첫 번째 <code>@font-face</code>의 <code>src url()</code>을 추출해서 fonts.gstatic.com에서 파일을 받아요. 확장자는 CSS의 <code>format()</code> 토큰 기준으로 정확히 결정됩니다.</p>
         <ul>
           <li>모던 브라우저 (Chrome / Safari / Firefox / Edge) → <strong>woff2</strong></li>
           <li>구형 브라우저 (IE 11) → <strong>woff</strong></li>
-          <li>파일명에 정확한 확장자 적용: <code>Playfair-Display.woff2</code></li>
         </ul>
+        <p><strong>Noonnu</strong> — src URL에서 직접 fetch해서 받습니다. jsdelivr는 WOFF2/WOFF/OTF/TTF 확장자를 정확히 노출하니 그대로 저장.</p>
         <div class="callout">
-          <strong>TTF가 필요한 경우:</strong> Google Fonts API는 더 이상 TTF를 제공하지 않아요. 디자인 툴(Figma, Sketch, Adobe) 호환을 위해 TTF가 꼭 필요하면 <strong>↗ Google Fonts</strong> 링크로 공식 페이지에서 직접 받으세요.
+          <strong>TTF가 필요한 경우:</strong> Google Fonts API는 WOFF2/WOFF만 제공 (User-Agent 기준). Noonnu는 원본이 TTF/OTF인 경우도 있어요. TTF가 꼭 필요하면 <strong>↗ Google Fonts / ↗ Noonnu</strong> 링크로 공식 페이지에서 직접 받으세요.
         </div>
 
-        <h3>↗ Google Fonts</h3>
-        <p>공식 specimen 페이지를 새 탭으로 열어요. 모든 weight, italic, glyph 미리보기, 그리고 TTF 수동 다운로드가 가능.</p>
+        <h3>↗ Google Fonts / ↗ Noonnu</h3>
+        <p>소스에 따라 다른 페이지로 이동:</p>
+        <ul>
+          <li><strong>Google Fonts</strong> — 공식 specimen 페이지. 모든 weight, italic, glyph 미리보기, TTF 수동 다운로드.</li>
+          <li><strong>Noonnu</strong> — 상세 페이지. 라이선스, 제작자, 원본 파일(일부 TTF 제공) 확인 가능.</li>
+        </ul>
       </section>
 
       <!-- ── 단축키 ──────────────────── -->
@@ -329,7 +341,7 @@
         <div class="qa">
           <div class="qa__q">Q. 폰트 개수와 조합 수는?</div>
           <div class="qa__a">
-            98개 폰트 (영문 75 + 한글 23). 5개 카테고리. 추천 가능한 페어 9,506개 (영문 5,550 + 한글 506 + 크로스 스크립트 3,450). 80점 이상 고득점 페어 2,565개. <strong>왜 98개인지에 대한 자세한 선정 기준은 <a href="#curation">폰트 큐레이션</a> 섹션 참고.</strong>
+            198개 폰트 (Google Fonts 98 + Noonnu 100). 5개 카테고리. Google Fonts 영문 75 + 한글 23, Noonnu 한글 100. <strong>왜 198개인지에 대한 자세한 선정 기준은 <a href="#curation">폰트 큐레이션</a> 섹션 참고.</strong>
           </div>
         </div>
 
@@ -348,16 +360,16 @@
         </div>
 
         <div class="qa">
-          <div class="qa__q">Q. 한글 폰트 추천이 좀 부족한 것 같아요</div>
+          <div class="qa__q">Q. 한글 폰트 추천이 부족한 것 같아요</div>
           <div class="qa__a">
-            Google Fonts가 제공하는 한글 폰트가 23개로 제한적이에요. Pretendard, Spoqa Han Sans Neo 같은 인기 폰트는 Google Fonts에 없어서 큐레이션에 포함 못 했습니다. 직접 추가하려면 <code>data/fonts.js</code>에 항목을 더하고 <code>app.js</code>의 폰트 라이브러리에 등록하면 돼요.
+            v2에서 Noonnu 인기 100선을 추가해서 한글 폰트가 <strong>총 123개 (Google 23 + Noonnu 100)</strong>로 늘었어요. Pretendard, Paperlogy, GmarketSans, SUIT, S-CoreDream, LeeSeoyun, KoPubDotum 같은 인기 폰트가 다 포함돼 있어요. 상단 토글에서 <strong>눈누</strong>만 선택하면 한글 폰트만 볼 수 있어요.
           </div>
         </div>
 
         <div class="qa">
           <div class="qa__q">Q. TTF로 다운로드가 안 돼요</div>
           <div class="qa__a">
-            Google Fonts API는 WOFF2/WOFF만 제공 (User-Agent 기준). 브라우저의 <code>fetch()</code>는 <code>User-Agent</code> 헤더가 forbidden이라 변경 불가능. TTF가 꼭 필요하면 <strong>↗ Google Fonts</strong> 링크로 공식 페이지에서 직접 받기.
+            Google Fonts API는 WOFF2/WOFF만 제공 (User-Agent 기준). 브라우저의 <code>fetch()</code>는 <code>User-Agent</code> 헤더가 forbidden이라 변경 불가능. TTF가 꼭 필요하면 <strong>↗ Google Fonts / ↗ Noonnu</strong> 링크로 공식 페이지에서 직접 받기.
           </div>
         </div>
 
@@ -371,7 +383,7 @@
         <div class="qa">
           <div class="qa__q">Q. 오프라인에서도 쓸 수 있나요?</div>
           <div class="qa__a">
-            폰트가 Google Fonts CDN에서 로드되기 때문에 인터넷 필요. 오프라인 사용은 정식 호스팅으로 가져간 뒤 <code>fonts.js</code>와 <code>loader.js</code>를 수정해서 로컬 폰트 파일을 가리키게 변경하면 가능.
+            폰트가 Google Fonts / jsdelivr CDN에서 로드되기 때문에 인터넷 필요. 오프라인 사용은 정식 호스팅으로 가져간 뒤 <code>fonts.js</code> / <code>noonnuFonts.js</code>와 <code>loader.js</code>를 수정해서 로컬 폰트 파일을 가리키게 변경하면 가능.
           </div>
         </div>
       </section>
@@ -387,10 +399,11 @@
 ├── manual.html         이 매뉴얼
 ├── styles.css          스타일 (라이트/다크)
 ├── data/
-│   └── fonts.js        폰트 데이터 (98개 × 카테고리 × 무드)
+│   ├── fonts.js          Google Fonts 데이터 (98개 × 카테고리 × 무드)
+│   └── noonnuFonts.js    Noonnu 한글 폰트 데이터 (100개 × jsdelivr src)
 └── js/
     ├── pairing.js      페어링 점수 엔진
-    ├── loader.js       Google Fonts CSS API 로더
+    ├── loader.js       Google Fonts CSS API + Noonnu @font-face 인젝션
     └── app.js          UI 와이어링</code></pre>
 
         <h3>페어링 점수표 (PAIR_SCORE)</h3>
@@ -421,11 +434,20 @@
           <li>IE 11 미지원</li>
         </ul>
 
+        <h3>Noonnu (jsdelivr CDN)</h3>
+        <ul>
+          <li><strong>CDN URL</strong>: <code>https://cdn.jsdelivr.net/gh/projectnoonnu/{repo}@{ver}/{font}.woff2</code></li>
+          <li>Noonnu가 GitHub에 호스팅한 폰트를 jsdelivr가 CDN으로 미러링</li>
+          <li>폰트별로 <code>&lt;style&gt;@font-face{...}&lt;/style&gt;</code>을 동적 주입 (CSS API 미사용)</li>
+          <li>CORS 허용 — 직접 fetch & 다운로드 가능</li>
+          <li>WOFF2, WOFF, OTF, TTF 모두 지원 (폰트별 상이)</li>
+        </ul>
+
         <h3>기술 스택</h3>
         <ul>
           <li>Vanilla JavaScript (ES2020+) — 프레임워크 없음</li>
           <li>CSS Custom Properties (테마 시스템)</li>
-          <li>Google Fonts CSS API</li>
+          <li>Google Fonts CSS API + jsdelivr CDN (Noonnu)</li>
           <li>Canvas API (현재 버전에서는 미사용)</li>
         </ul>
         <hr />
