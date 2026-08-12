@@ -230,9 +230,8 @@
           ? `📋 ${font.name} @font-face 코드 복사됨 — CSS에 붙여넣기`
           : `📋 ${font.name} @import URL 복사됨`;
         copyToClipboard(fontImportURL(font), msg);
-      } else if (action === 'download') {
-        downloadFontFile(font);
       }
+      // 폰트 받기(action='download')는 저작권 문제로 제거됨 — 각 폰트 페이지에서 라이선스 확인 후 받기
     });
     document.addEventListener('click', e => {
       if (!popover.contains(e.target) && !btn.contains(e.target)) close();
@@ -742,73 +741,7 @@
     return `https://fonts.google.com/specimen/${encodeURIComponent(font.name).replace(/%20/g, '+')}`;
   }
 
-  // Google Fonts CSS의 format() 토큰 → 파일 확장자
-  const FORMAT_TO_EXT = {
-    'woff2':             'woff2',
-    'woff':              'woff',
-    'truetype':          'ttf',
-    'opentype':          'otf',
-    'embedded-opentype': 'eot',
-    'svg':               'svg'
-  };
-
-  /**
-   * Noonnu: src URL에서 직접 fetch (jsdelivr CORS 허용)
-   * Google: CSS fetch → 첫 번째 @font-face의 src url + format() 추출 → fetch → 다운로드
-   *
-   * Google Fonts API는 User-Agent 기준으로 포맷을 결정:
-   *   - 모던 브라우저 (Chrome/Firefox/Safari/Edge) → woff2
-   *   - IE 11 등 옛날 브라우저                      → ttf
-   *
-   * 브라우저의 fetch()는 User-Agent 헤더를 설정할 수 없어서 (forbidden header)
-   * TTF를 강제로 받을 방법은 없음. 그래서 받은 그대로 저장.
-   * WOFF2가 사실 더 작고 효율적이라 웹용으로는 더 권장됨.
-   */
-  async function downloadFontFile(font) {
-    try {
-      flashMessage(`⬇ ${font.name} 다운로드 중…`);
-
-      let fileURL, format;
-
-      if (font.source === 'noonnu') {
-        fileURL = font.src;
-        if (/\.woff2(\?|$)/i.test(fileURL)) format = 'woff2';
-        else if (/\.woff(\?|$)/i.test(fileURL)) format = 'woff';
-        else if (/\.otf(\?|$)/i.test(fileURL))  format = 'opentype';
-        else format = 'truetype';
-      } else {
-        const cssRes = await fetch(fontImportURL(font));
-        if (!cssRes.ok) throw new Error('CSS 요청 실패 (' + cssRes.status + ')');
-        const css = await cssRes.text();
-
-        const urlMatch = css.match(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/);
-        if (!urlMatch) throw new Error('폰트 파일 URL을 찾을 수 없음');
-        fileURL = urlMatch[1];
-        const formatMatch = css.match(/url\([^)]+\)\s+format\(['"]?([\w-]+)['"]?\)/);
-        format = formatMatch ? formatMatch[1] : 'truetype';
-      }
-
-      const ext = FORMAT_TO_EXT[format] || (fileURL.match(/\.(\w+)$/) || [, 'ttf'])[1];
-
-      const fileRes = await fetch(fileURL);
-      if (!fileRes.ok) throw new Error('파일 요청 실패 (' + fileRes.status + ')');
-      const blob = await fileRes.blob();
-
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `${font.name.replace(/\s+/g, '-')}.${ext}`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(a.href), 100);
-
-      const hint = format === 'truetype' ? '' : ' · TTF가 필요하면 페이지에서 직접 받으세요';
-      flashMessage(`✅ ${font.name}.${ext} (${format})${hint}`);
-    } catch (e) {
-      console.error(e);
-      flashMessage('❌ 다운로드 실패 — CORS 또는 네트워크 문제');
-    }
-  }
+  // 폰트 받기(downloadFontFile)는 저작권 문제로 제거됨 — 각 폰트 페이지에서 라이선스 확인 후 직접 받기
 
   // ── 클립보드 ─────────────────────────────────────────
   function copyToClipboard(text, successMsg) {

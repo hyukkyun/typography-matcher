@@ -366,7 +366,7 @@ a:hover { text-decoration: underline; }
 }
 .link-popover__actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 4px;
 }
 .link-popover__btn {
@@ -394,7 +394,7 @@ a:hover { text-decoration: underline; }
   background: var(--bg-elev);
 }
 .link-popover__btn--link {
-  grid-column: 1 / -1;
+  /* 단일 column grid이므로 불필요 */
 }
 
 /* ── Custom font picker ──────────────────────── */
